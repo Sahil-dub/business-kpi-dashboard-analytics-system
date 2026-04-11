@@ -42,7 +42,7 @@ Why this dataset was chosen:
 
 `Raw CSV -> Python ETL -> Cleaned dataset -> PostgreSQL star schema -> SQL KPIs -> Power BI-ready outputs`
 
-See [architecture.md](/D:/Projects/Business%20KPI%20Dashboard%20%26%20Analytics%20System/docs/architecture.md) for the full explanation.
+See [architecture.md](docs/architecture.md) for the full explanation.
 
 ## Tech stack
 
@@ -130,7 +130,7 @@ Current generated KPI highlights:
 - One-time customers: **11**
 - Repeat customer rate: **98.62%**
 
-More business interpretation is documented in [business_insights.md](/D:/Projects/Business%20KPI%20Dashboard%20%26%20Analytics%20System/docs/business_insights.md).
+More business interpretation is documented in [business_insights.md](docs/business_insights.md).
 
 ## Setup instructions
 
@@ -211,7 +211,7 @@ pytest tests/test_transform.py
 
 ## Power BI dashboard overview
 
-The repository includes a full dashboard build guide in [dashboard_spec.md](/D:/Projects/Business%20KPI%20Dashboard%20%26%20Analytics%20System/docs/dashboard_spec.md).
+The repository includes a full dashboard build guide in [dashboard_spec.md](docs/dashboard_spec.md).
 
 Recommended report pages:
 

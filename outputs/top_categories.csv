@@ -1,0 +1,18 @@
+product_category,product_sub_category,revenue,profit,quantity,orders,profit_margin_pct
+Technology,Office Machines,2168697.14,307712.93,7856,334,14.19
+Furniture,Tables,1896008.14,-99062.5,9195,355,-5.22
+Technology,Telephones and Communication,1889313.8,316951.62,22969,840,16.78
+Furniture,Chairs & Chairmats,1761836.55,149649.73,9590,375,8.49
+Technology,Copiers and Fax,1130361.3,167361.49,2128,87,14.81
+Office Supplies,Storage & Organization,1070182.6,6664.15,13804,537,0.62
+Office Supplies,Binders and Binder Accessories,1022957.59,307413.39,22992,868,30.05
+Furniture,Bookcases,822652.04,-33582.13,4891,188,-4.08
+Technology,Computer Peripherals,795875.94,94287.48,19222,731,11.85
+Office Supplies,Appliances,736991.54,97158.06,10901,423,13.18
+Furniture,Office Furnishings,698093.81,100427.93,20648,757,14.39
+Office Supplies,Paper,446452.86,45263.2,30871,1150,10.14
+Office Supplies,Envelopes,174085.8,48182.6,6578,244,27.68
+Office Supplies,Pens & Art Supplies,167107.22,7564.78,16980,607,4.53
+Office Supplies,"Scissors, Rulers and Trimmers",80996.31,-7799.25,3931,144,-9.63
+Office Supplies,Labels,38981.55,13677.17,7301,285,35.09
+Office Supplies,Rubber Bands,15006.63,-102.67,4920,178,-0.68

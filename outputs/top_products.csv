@@ -1,0 +1,11 @@
+product_id,product_name,product_category,revenue,profit,quantity,orders,profit_margin_pct
+PROD-0566,Global Troyª Executive Leather Low-Back Tilter,Furniture,275941.52,79284.78,550,17,28.73
+PROD-0861,Polycom ViewStationª ISDN Videoconferencing Unit,Technology,255303.97,-17771.27,41,7,-6.96
+PROD-0324,Canon PC940 Copier,Technology,210910.68,47705.85,474,18,22.62
+PROD-0896,"Riverside Palais Royal Lawyers Bookcase, Royale Cherry Finish",Furniture,206494.13,14291.57,236,11,6.92
+PROD-0583,Hewlett Packard LaserJet 3310 Copier,Technology,194880.35,73299.61,334,10,37.61
+PROD-0295,Bretford CR8500 Series Meeting Room Furniture,Furniture,147412.21,-1989.87,407,14,-1.35
+PROD-0947,Sharp AL-1530CS Digital Copier,Technology,130046.81,11770.3,260,11,9.05
+PROD-0592,"Hewlett-Packard cp1700 [D, PS] Series Color Inkjet Printers",Technology,128100.43,55281.39,269,10,43.15
+PROD-0516,GBC DocuBind 200 Manual Binding Machine,Office Supplies,120342.74,50462.53,286,16,41.93
+PROD-0326,Canon imageCLASS 2200 Advanced Copier,Technology,114173.41,-31885.68,32,7,-27.93

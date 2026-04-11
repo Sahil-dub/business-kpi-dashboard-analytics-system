@@ -1,11 +1,11 @@
 product_id,product_name,product_category,revenue,profit,quantity,orders,profit_margin_pct
-PROD-0836,Okidata Pacemark 4410N Wide Format Dot Matrix Printer,Technology,60619.66,-43949.37,18,6,-72.5
-PROD-0326,Canon imageCLASS 2200 Advanced Copier,Technology,114173.41,-31885.68,32,7,-27.93
-PROD-0558,"Global High-Back Leather Tilter, Burgundy",Furniture,82752.2,-30518.9,666,24,-36.88
-PROD-0448,Epson DFX-8500 Dot Matrix Printer,Technology,85975.08,-29400.34,35,7,-34.2
-PROD-0633,Hoover Portapowerª Portable Vacuum,Office Supplies,2946.43,-21088.48,465,18,-715.73
-PROD-0861,Polycom ViewStationª ISDN Videoconferencing Unit,Technology,255303.97,-17771.27,41,7,-6.96
-PROD-0449,Epson DFX5000+ Dot Matrix Printer,Technology,20835.42,-16160.74,14,5,-77.56
-PROD-0690,KI Conference Tables,Furniture,23289.69,-15701.27,323,13,-67.42
-PROD-0713,Lexmark 4227 Plus Dot Matrix Printer,Technology,59735.01,-15492.81,32,6,-25.94
+PROD-0837,Okidata Pacemark 4410N Wide Format Dot Matrix Printer,Technology,60619.66,-43949.37,18,6,-72.5
+PROD-0327,Canon imageCLASS 2200 Advanced Copier,Technology,114173.41,-31885.68,32,7,-27.93
+PROD-0559,"Global High-Back Leather Tilter, Burgundy",Furniture,82752.2,-30518.9,666,24,-36.88
+PROD-0449,Epson DFX-8500 Dot Matrix Printer,Technology,85975.08,-29400.34,35,7,-34.2
+PROD-0634,Hoover Portapowerª Portable Vacuum,Office Supplies,2946.43,-21088.48,465,18,-715.73
+PROD-0862,Polycom ViewStationª ISDN Videoconferencing Unit,Technology,255303.97,-17771.27,41,7,-6.96
+PROD-0450,Epson DFX5000+ Dot Matrix Printer,Technology,20835.42,-16160.74,14,5,-77.56
+PROD-0691,KI Conference Tables,Furniture,23289.69,-15701.27,323,13,-67.42
+PROD-0714,Lexmark 4227 Plus Dot Matrix Printer,Technology,59735.01,-15492.81,32,6,-25.94
 PROD-0292,BoxOffice By Design Rectangular and Half-Moon Meeting Room Tables,Furniture,104483.14,-14938.68,516,22,-14.3

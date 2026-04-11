@@ -65,7 +65,41 @@ def build_dimension_tables(clean_df: pd.DataFrame) -> dict[str, pd.DataFrame]:
         drop=True
     )
 
-    fact_sales = clean_df.copy().rename(columns={"row_id": "sales_line_id"})
+    fact_sales = clean_df.rename(columns={"row_id": "sales_line_id"})[
+        [
+            "sales_line_id",
+            "order_id",
+            "order_date",
+            "ship_date",
+            "order_priority",
+            "ship_mode",
+            "customer_id",
+            "geography_id",
+            "product_id",
+            "customer_type",
+            "customer_order_number",
+            "first_order_date",
+            "order_quantity",
+            "sales_amount",
+            "discount_rate",
+            "unit_price",
+            "shipping_cost",
+            "profit_amount",
+            "product_base_margin",
+            "gross_margin_pct",
+            "shipping_cost_ratio",
+            "ship_delay_days",
+            "order_sales_total",
+            "order_profit_total",
+            "order_line_count",
+            "is_profitable",
+            "order_year",
+            "order_quarter",
+            "order_month",
+            "order_month_start",
+            "order_year_month",
+        ]
+    ].copy()
 
     return {
         "dim_customers": customers,

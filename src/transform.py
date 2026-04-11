@@ -91,10 +91,20 @@ def clean_sales_data(raw_df: pd.DataFrame) -> pd.DataFrame:
     df["product_base_margin"] = df["product_base_margin"].fillna(overall_margin)
 
     df["customer_id"] = _create_surrogate_ids(
-        df["customer_name"].astype(str) + "|" + df["customer_segment"].astype(str),
-        prefix="CUST",
-    )
-    df["product_id"] = _create_surrogate_ids(df["product_name"], prefix="PROD")
+    df["customer_name"].astype(str) + "|" + df["customer_segment"].astype(str),
+    prefix="CUST",
+)
+    df["product_id"] = _create_surrogate_ids(
+    df["product_name"].astype(str)
+    + "|"
+    + df["product_category"].astype(str)
+    + "|"
+    + df["product_sub_category"].astype(str)
+    + "|"
+    + df["product_container"].astype(str),
+    prefix="PROD",
+)
+
     df["geography_id"] = _create_surrogate_ids(
         df["region"].astype(str) + "|" + df["province"].astype(str), prefix="GEO"
     )

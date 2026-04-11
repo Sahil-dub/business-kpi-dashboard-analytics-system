@@ -1,14 +1,14 @@
 region,province,revenue,profit,orders,customers,profit_margin_pct
-Ontario,Ontario,3063212.48,346868.54,1235,281,11.32
-West,British Columbia,1892757.78,145062.13,748,203,7.66
-West,Alberta,1704791.49,151946.48,590,122,8.91
-Quebec,Quebec,1510195.08,140426.65,587,170,9.3
-Prarie,Saskachewan,1464455.82,184732.96,610,116,12.61
-Prarie,Manitoba,1372848.78,136427.16,541,146,9.94
-Yukon,Yukon,975867.37,73849.21,396,107,7.57
-Atlantic,Nova Scotia,817729.36,85361.87,347,156,10.44
-Northwest Territories,Northwest Territories,800847.33,100653.08,269,62,12.57
-Atlantic,New Brunswick,684211.52,115351.94,222,44,16.86
-Atlantic,Prince Edward Island,409383.25,31361.71,139,39,7.66
-Nunavut,Nunavut,116376.48,2841.11,56,38,2.44
-Atlantic,Newfoundland,102924.07,6885.14,76,54,6.69
+Ontario,Ontario,3063212.48,346868.54,1235,337,11.32
+West,British Columbia,1892757.78,145062.13,748,239,7.66
+West,Alberta,1704791.49,151946.48,590,143,8.91
+Quebec,Quebec,1510195.08,140426.65,587,210,9.3
+Prarie,Saskachewan,1464455.82,184732.96,610,141,12.61
+Prarie,Manitoba,1372848.78,136427.16,541,172,9.94
+Yukon,Yukon,975867.37,73849.21,396,130,7.57
+Atlantic,Nova Scotia,817729.36,85361.87,347,187,10.44
+Northwest Territories,Northwest Territories,800847.33,100653.08,269,76,12.57
+Atlantic,New Brunswick,684211.52,115351.94,222,54,16.86
+Atlantic,Prince Edward Island,409383.25,31361.71,139,45,7.66
+Nunavut,Nunavut,116376.48,2841.11,56,40,2.44
+Atlantic,Newfoundland,102924.07,6885.14,76,58,6.69

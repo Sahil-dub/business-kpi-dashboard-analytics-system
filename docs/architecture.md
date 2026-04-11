@@ -63,5 +63,3 @@ The source data is transactional and naturally fits a star-schema reporting mode
 - `dim_products`: product hierarchy and price/margin descriptors
 - `dim_geography`: province and region attributes
 - `fact_sales`: order-line facts for revenue, quantity, shipping, profit, and customer behavior
-
-This design was chosen because it is easy to explain in interviews, efficient for KPI queries, and practical for Power BI relationships.

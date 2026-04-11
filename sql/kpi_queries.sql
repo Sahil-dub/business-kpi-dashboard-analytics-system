@@ -34,6 +34,9 @@ UNION ALL
 SELECT 'repeat_customers', repeat_customers::text
 FROM customer_rollup
 UNION ALL
+SELECT 'one_time_customers', (total_customers - repeat_customers)::text
+FROM customer_rollup
+UNION ALL
 SELECT 'repeat_customer_rate_pct', ROUND((repeat_customers::numeric / NULLIF(total_customers, 0) * 100), 2)::text
 FROM customer_rollup;
 

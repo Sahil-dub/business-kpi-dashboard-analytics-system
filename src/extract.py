@@ -17,6 +17,6 @@ def extract_raw_sales_data(path: Path | None = None) -> pd.DataFrame:
 
     return pd.read_csv(
         source_path,
-        encoding="utf-8",
+        encoding="latin1",
         low_memory=False,
     )

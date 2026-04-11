@@ -3,19 +3,25 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pandas as pd
-from sqlalchemy import create_engine, text
-from sqlalchemy.engine import Engine
 
 from src.config import Settings
 
+if TYPE_CHECKING:
+    from sqlalchemy.engine import Engine
 
-def create_engine_from_settings(settings: Settings) -> Engine:
+
+def create_engine_from_settings(settings: Settings) -> "Engine":
+    from sqlalchemy import create_engine
+
     return create_engine(settings.database_url, future=True)
 
 
-def execute_sql_file(engine: Engine, sql_path: Path, schema_name: str) -> None:
+def execute_sql_file(engine: "Engine", sql_path: Path, schema_name: str) -> None:
+    from sqlalchemy import text
+
     sql_text = sql_path.read_text(encoding="utf-8").replace("{{schema}}", schema_name)
     statements = [statement.strip() for statement in sql_text.split(";") if statement.strip()]
 
@@ -71,6 +77,8 @@ def build_dimension_tables(clean_df: pd.DataFrame) -> dict[str, pd.DataFrame]:
 
 def load_to_postgres(clean_df: pd.DataFrame, settings: Settings) -> None:
     """Create the schema and load dimension/fact tables into PostgreSQL."""
+
+    from sqlalchemy import text
 
     engine = create_engine_from_settings(settings)
     execute_sql_file(engine, settings.sql_dir / "schema.sql", settings.postgres_schema)

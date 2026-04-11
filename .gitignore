@@ -16,5 +16,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Generated outputs
-outputs/charts/*.png
+# Local runtime/cache artifacts
+tools/
+outputs/.matplotlib/

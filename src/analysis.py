@@ -2,14 +2,22 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
+from typing import TYPE_CHECKING
 
+os.environ.setdefault("MPLCONFIGDIR", str(Path(__file__).resolve().parents[1] / "outputs" / ".matplotlib"))
+
+import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
-from sqlalchemy import text
-from sqlalchemy.engine import Engine
 
 from src.config import Settings
+
+if TYPE_CHECKING:
+    from sqlalchemy.engine import Engine
+
+matplotlib.use("Agg")
 
 
 def _metric_frame(rows: list[tuple[str, float | int | str]]) -> pd.DataFrame:
@@ -21,11 +29,11 @@ def generate_kpi_summary(clean_df: pd.DataFrame) -> pd.DataFrame:
         order_revenue=("sales_amount", "sum"),
         order_profit=("profit_amount", "sum"),
     )
-    customer_types = clean_df[["customer_id", "customer_type"]].drop_duplicates()
-    new_customers = int((customer_types["customer_type"] == "New").sum())
+    total_customers = int(clean_df["customer_id"].nunique())
     repeat_customers = int(
         clean_df.loc[clean_df["customer_type"] == "Repeat", "customer_id"].nunique()
     )
+    one_time_customers = total_customers - repeat_customers
 
     return _metric_frame(
         [
@@ -39,14 +47,14 @@ def generate_kpi_summary(clean_df: pd.DataFrame) -> pd.DataFrame:
                 ),
             ),
             ("total_orders", int(clean_df["order_id"].nunique())),
-            ("total_customers", int(clean_df["customer_id"].nunique())),
+            ("total_customers", total_customers),
             ("average_order_value", round(order_level["order_revenue"].mean(), 2)),
             ("average_order_profit", round(order_level["order_profit"].mean(), 2)),
             ("repeat_customers", repeat_customers),
-            ("new_customers", new_customers),
+            ("one_time_customers", one_time_customers),
             (
                 "repeat_customer_rate_pct",
-                round((repeat_customers / clean_df["customer_id"].nunique()) * 100, 2),
+                round((repeat_customers / total_customers) * 100, 2),
             ),
         ]
     )
@@ -223,8 +231,10 @@ def generate_charts(outputs: dict[str, pd.DataFrame], charts_dir: Path) -> None:
     plt.close()
 
 
-def run_sql_exports(engine: Engine, settings: Settings) -> dict[str, pd.DataFrame]:
+def run_sql_exports(engine: "Engine", settings: Settings) -> dict[str, pd.DataFrame]:
     """Execute named SQL queries and return the results."""
+
+    from sqlalchemy import text
 
     sql_text = (settings.sql_dir / "kpi_queries.sql").read_text(encoding="utf-8")
     chunks = [chunk.strip() for chunk in sql_text.split("-- name:") if chunk.strip()]

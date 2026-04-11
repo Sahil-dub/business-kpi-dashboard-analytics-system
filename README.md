@@ -186,7 +186,8 @@ python -m src.pipeline
 ### Option 2: run the schema manually first
 
 ```sql
-\i sql/schema.sql
+-- Replace {{schema}} with your schema name, for example analytics,
+-- then run the resulting SQL in PostgreSQL.
 ```
 
 Then load with the Python pipeline.

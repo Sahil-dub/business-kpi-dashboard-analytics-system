@@ -1,5 +1,8 @@
 # Business KPI Dashboard & Analytics System
 
+**Live recruiter demo:** https://sahil-dub.github.io/business-kpi-dashboard-analytics-system/
+
+
 **End-to-end retail analytics pipeline that transforms raw transactional sales data into a reporting-ready dataset, PostgreSQL star schema, SQL KPI layer, and Power BI-ready outputs.**
 
 Built with **Python, pandas, PostgreSQL, SQLAlchemy, SQL, pytest, matplotlib, and Power BI**.
@@ -56,17 +59,17 @@ The current generated outputs show:
 | Profit | **$1.52M** |
 | Profit margin | **10.2%** |
 | Orders | **5,496** |
-| Customers | **795** |
+| Customers | **989** |
 | Average order value | **$2,713.90** |
-| Repeat customers | **784** |
-| One-time customers | **11** |
-| Repeat customer rate | **98.62%** |
+| Repeat customers | **930** |
+| One-time customers | **59** |
+| Repeat customer rate | **94.03%** |
 
 ### What the numbers suggest
 
-**Technology is the strongest category-level profit engine.** It generated approximately **$5.98M revenue** and **$886.3K profit**, with a **14.81% margin**.
+**Technology is the strongest category-level profit engine.** The repository's category outputs show Technology sub-categories as major profit contributors, including **$307.7K profit** from Office Machines and **$317.0K** from Telephones and Communication.
 
-**Furniture is the clearest profitability problem.** It generated approximately **$5.18M revenue** but only **$117.4K profit**, producing a **2.27% margin**.
+**Furniture is the clearest profitability problem.** Furniture contains the clearest profitability risks in the generated outputs, including Tables at **-$99.1K profit** and **-5.22% margin**.
 
 **Tables require particular attention.** They generated approximately **$1.90M revenue** while contributing about **-$99.1K profit**.
 
@@ -74,7 +77,7 @@ The current generated outputs show:
 
 **Ontario is the strongest geography by revenue.** It generated approximately **$3.06M revenue** and **$346.9K profit** across **1,235 orders**.
 
-These findings are derived from the repository's generated KPI outputs and are documented in `docs/business_insights.md`.
+These findings are derived from the repository's generated KPI outputs.
 
 ## Data engineering workflow
 
@@ -182,7 +185,7 @@ The repository includes a dashboard specification for five report pages:
 
 Recommended visuals include KPI cards, revenue trends, MoM growth, category profitability, customer analysis, product rankings, and geographic comparisons.
 
-The project currently provides **Power BI-ready outputs and a dashboard build specification rather than a committed .pbix file**.
+The project currently provides **Power BI-ready outputs and a dashboard build specification rather than a committed `.pbix` file**. The repository also includes a lightweight static recruiter demo published through GitHub Pages.
 
 ## Generated outputs
 

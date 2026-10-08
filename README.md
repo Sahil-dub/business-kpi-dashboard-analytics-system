@@ -1,144 +1,285 @@
 # Business KPI Dashboard & Analytics System
 
-Portfolio-ready analytics engineering project for a retail-style business. The repository shows how to take a messy public sales dataset from raw CSV to cleaned reporting tables, KPI outputs, a PostgreSQL-ready schema, and a Power BI dashboard specification.
+**End-to-end retail analytics pipeline that transforms raw transactional sales data into a reporting-ready dataset, PostgreSQL star schema, SQL KPI layer, and Power BI-ready outputs.**
 
-## Project overview
+Built with **Python, pandas, PostgreSQL, SQLAlchemy, SQL, pytest, matplotlib, and Power BI**.
 
-This project simulates a management reporting system for a retail / e-commerce business that needs visibility into:
+## Project at a glance
 
-- revenue and profitability
-- order trends over time
-- customer behavior and repeat purchasing
-- product and category performance
-- regional performance
-
-The final output is designed to be useful both as a technical portfolio project and as a practical BI reporting case study.
+| Area | Implementation |
+|---|---|
+| Source data | Superstore transactional sales dataset |
+| Processing | Python ETL + validation + feature engineering |
+| Data model | PostgreSQL star schema |
+| Analytics | SQL KPI query pack + Python analysis |
+| BI handoff | Power BI-ready CSV outputs + dashboard specification |
+| Outputs | KPI, monthly, customer, product, category and regional datasets |
+| Visuals | Revenue trend + category profitability charts |
+| Quality | pytest |
+| Database loading | SQLAlchemy + PostgreSQL |
 
 ## Business problem
 
-Leadership teams often have transactional sales data but no consistent analytics layer. That creates several problems:
+Transactional sales data is useful only when teams can turn it into consistent management information.
 
-- KPIs are recalculated differently across teams
-- profitability issues hide behind headline revenue
-- customer retention is hard to monitor
-- product and regional underperformance are spotted too late
+This project builds an analytics workflow for questions such as:
 
-This repository solves that by building a reproducible pipeline that cleans the data, prepares a reporting schema, exports KPI files, and documents the dashboard design.
-
-## Dataset
-
-- Dataset: Superstore Sales
-- Raw file: `data/raw/superstore_sales.csv`
-- Public source: [curran/data superstoreSales](https://github.com/curran/data/tree/gh-pages/superstoreSales)
-- Direct CSV URL: [superstoreSales.csv](https://raw.githubusercontent.com/curran/data/gh-pages/superstoreSales/superstoreSales.csv)
-
-Why this dataset was chosen:
-
-- transactional retail-style structure
-- includes sales, profit, discount, quantity, shipping, category, and region fields
-- supports revenue, margin, customer, and regional KPI reporting
+- Are we growing revenue profitably?
+- Which categories and products generate or destroy margin?
+- Which customers drive the largest revenue pool?
+- How is performance changing over time?
+- Which regions are commercially strong?
+- Where should management investigate pricing, discounting, or product mix?
 
 ## Architecture
 
-`Raw CSV -> Python ETL -> Cleaned dataset -> PostgreSQL star schema -> SQL KPIs -> Power BI-ready outputs`
+```mermaid
+flowchart LR
+    A["Raw Superstore CSV"] --> B["Python ETL"]
+    B --> C["Cleaned Reporting Dataset"]
+    C --> D["PostgreSQL Star Schema"]
+    C --> E["Python KPI Analysis"]
+    D --> F["SQL KPI Layer"]
+    E --> G["Power BI-ready Outputs"]
+    F --> G
+```
 
-See [architecture.md](docs/architecture.md) for the full explanation.
+The pipeline is designed so the same cleaned data can support both **SQL-based reporting** and **Power BI analysis**.
+
+## Key business results
+
+The current generated outputs show:
+
+| KPI | Result |
+|---|---:|
+| Revenue | **$14.92M** |
+| Profit | **$1.52M** |
+| Profit margin | **10.2%** |
+| Orders | **5,496** |
+| Customers | **795** |
+| Average order value | **$2,713.90** |
+| Repeat customers | **784** |
+| One-time customers | **11** |
+| Repeat customer rate | **98.62%** |
+
+### What the numbers suggest
+
+**Technology is the strongest category-level profit engine.** It generated approximately **$5.98M revenue** and **$886.3K profit**, with a **14.81% margin**.
+
+**Furniture is the clearest profitability problem.** It generated approximately **$5.18M revenue** but only **$117.4K profit**, producing a **2.27% margin**.
+
+**Tables require particular attention.** They generated approximately **$1.90M revenue** while contributing about **-$99.1K profit**.
+
+**March 2010 is an important profitability anomaly.** Revenue was approximately **$217.8K**, but profit was only **$1.1K**, suggesting that discounting, product mix, or cost pressure deserves investigation.
+
+**Ontario is the strongest geography by revenue.** It generated approximately **$3.06M revenue** and **$346.9K profit** across **1,235 orders**.
+
+These findings are derived from the repository's generated KPI outputs and are documented in `docs/business_insights.md`.
+
+## Data engineering workflow
+
+The main pipeline is:
+
+```text
+Raw CSV
+  ↓
+Column standardization
+  ↓
+Data type conversion
+  ↓
+Duplicate / invalid-record handling
+  ↓
+Missing-value treatment
+  ↓
+Surrogate dimension IDs
+  ↓
+Reporting features
+  ↓
+Cleaned dataset
+  ├── KPI exports
+  ├── customer summaries
+  ├── product/category summaries
+  ├── regional summaries
+  ├── monthly trends
+  └── chart assets
+       ↓
+PostgreSQL star schema
+       ↓
+SQL KPI queries
+       ↓
+Power BI
+```
+
+The transformation layer also engineers:
+
+- shipment delay days
+- gross margin percentage
+- shipping cost ratio
+- profitability flags
+- order year / quarter / month
+- customer order sequence
+- first-order date
+- order-level revenue and profit totals
+
+## Data model
+
+The PostgreSQL reporting layer follows a star-schema design:
+
+```text
+                 dim_customers
+                       │
+                       │
+dim_products ─── fact_sales ─── dim_geography
+```
+
+### Dimensions
+
+- `dim_customers`
+- `dim_products`
+- `dim_geography`
+
+### Fact
+
+- `fact_sales`
+
+This structure keeps analytical dimensions separate from transactional measures and makes the model straightforward to consume from SQL or Power BI.
+
+## SQL analytics
+
+`sql/kpi_queries.sql` contains reusable queries for:
+
+- Executive KPI summary
+- Monthly revenue and month-over-month growth
+- Top products
+- Category/sub-category performance
+- Regional performance
+- Customer retention
+- Low-performing products
+
+The queries calculate both scale and profitability rather than relying only on revenue rankings.
+
+Example business analysis pattern:
+
+```sql
+revenue
+profit
+profit_margin_pct
+orders
+customers
+```
+
+This allows a high-revenue product or category to be evaluated alongside its actual profit contribution.
+
+## Power BI
+
+The repository includes a dashboard specification for five report pages:
+
+1. **Executive Overview**
+2. **Sales Trends**
+3. **Customer Insights**
+4. **Product & Category Performance**
+5. **Regional Performance**
+
+Recommended visuals include KPI cards, revenue trends, MoM growth, category profitability, customer analysis, product rankings, and geographic comparisons.
+
+The project currently provides **Power BI-ready outputs and a dashboard build specification rather than a committed .pbix file**.
+
+## Generated outputs
+
+The pipeline produces:
+
+```text
+outputs/
+├── cleaned_dataset.csv
+├── customer_segments.csv
+├── customer_summary.csv
+├── kpi_summary.csv
+├── low_performing_products.csv
+├── monthly_revenue.csv
+├── top_categories.csv
+├── top_products.csv
+├── top_regions.csv
+└── charts/
+    ├── category_profitability.png
+    └── monthly_revenue_trend.png
+```
+
+These outputs make the project useful even without a live PostgreSQL connection.
+
+## Charts
+
+### Monthly revenue trend
+
+![Monthly Revenue Trend](outputs/charts/monthly_revenue_trend.png)
+
+### Profit by category
+
+![Category Profitability](outputs/charts/category_profitability.png)
 
 ## Tech stack
 
+### Data & analytics
+
 - Python 3.11
 - pandas
-- numpy
-- SQLAlchemy
-- psycopg2-binary
-- PostgreSQL
-- pytest
+- NumPy
 - matplotlib
-- Markdown
+- SQL
+
+### Database
+
+- PostgreSQL
+- SQLAlchemy
+- psycopg2
+
+### BI
+
+- Power BI
+- DAX-ready reporting structure
+
+### Quality
+
+- pytest
 - Git
 
 ## Repository structure
 
 ```text
 .
-|-- README.md
-|-- requirements.txt
-|-- .env.example
-|-- data/
-|   |-- raw/
-|   |   `-- superstore_sales.csv
-|   `-- processed/
-|       `-- cleaned_sales_dataset.csv
-|-- docs/
-|   |-- architecture.md
-|   |-- business_insights.md
-|   |-- dashboard_spec.md
-|   `-- source_data_profile.md
-|-- outputs/
-|   |-- cleaned_dataset.csv
-|   |-- customer_segments.csv
-|   |-- customer_summary.csv
-|   |-- kpi_summary.csv
-|   |-- low_performing_products.csv
-|   |-- monthly_revenue.csv
-|   |-- top_categories.csv
-|   |-- top_products.csv
-|   |-- top_regions.csv
-|   `-- charts/
-|       |-- category_profitability.png
-|       `-- monthly_revenue_trend.png
-|-- sql/
-|   |-- kpi_queries.sql
-|   `-- schema.sql
-|-- src/
-|   |-- analysis.py
-|   |-- config.py
-|   |-- extract.py
-|   |-- load.py
-|   |-- pipeline.py
-|   `-- transform.py
-`-- tests/
-    `-- test_transform.py
+├── data/
+│   ├── raw/
+│   └── processed/
+├── docs/
+│   ├── architecture.md
+│   ├── business_insights.md
+│   ├── dashboard_spec.md
+│   └── source_data_profile.md
+├── outputs/
+│   ├── KPI and analytical CSV exports
+│   └── charts/
+├── sql/
+│   ├── kpi_queries.sql
+│   └── schema.sql
+├── src/
+│   ├── analysis.py
+│   ├── config.py
+│   ├── extract.py
+│   ├── load.py
+│   ├── pipeline.py
+│   └── transform.py
+├── tests/
+│   └── test_transform.py
+├── requirements.txt
+└── README.md
 ```
 
-## Data model
-
-The reporting model uses a star-schema approach:
-
-- `dim_customers`
-- `dim_products`
-- `dim_geography`
-- `fact_sales`
-
-This was chosen because it is:
-
-- easy to explain in interviews
-- practical for KPI queries
-- friendly for Power BI relationships
-
-## Key outputs
-
-Current generated KPI highlights:
-
-- Total revenue: **$14.92M**
-- Total profit: **$1.52M**
-- Profit margin: **10.2%**
-- Total orders: **5,496**
-- Total customers: **795**
-- Average order value: **$2,713.90**
-- Repeat customers: **784**
-- One-time customers: **11**
-- Repeat customer rate: **98.62%**
-
-More business interpretation is documented in [business_insights.md](docs/business_insights.md).
-
-## Setup instructions
+## Run locally
 
 ### 1. Create a virtual environment
 
 ```powershell
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+.venv\\Scripts\\Activate.ps1
 ```
 
 ### 2. Install dependencies
@@ -147,126 +288,65 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### 3. Configure PostgreSQL credentials
-
-Copy `.env.example` to `.env` and set:
-
-- `POSTGRES_HOST`
-- `POSTGRES_PORT`
-- `POSTGRES_DB`
-- `POSTGRES_USER`
-- `POSTGRES_PASSWORD`
-- `POSTGRES_SCHEMA`
-
-If `POSTGRES_PASSWORD` is not set, the pipeline still runs and generates all CSV outputs, but skips the database load step.
-
-## How to run the ETL pipeline
+### 3. Run the complete pipeline
 
 ```powershell
 python -m src.pipeline
 ```
 
-What the pipeline does:
+The pipeline will:
 
-1. reads the raw CSV
-2. standardizes and cleans the data
-3. engineers reporting columns
-4. writes the cleaned dataset to `data/processed/` and `outputs/`
-5. generates KPI CSV files and chart assets
-6. loads PostgreSQL tables when credentials are configured
+1. Read the raw dataset.
+2. Clean and transform the records.
+3. Write the cleaned dataset.
+4. Generate analytical CSV outputs.
+5. Generate chart assets.
+6. Load PostgreSQL when database credentials are configured.
 
-## How to initialize PostgreSQL
-
-### Option 1: let the pipeline create and load tables
-
-```powershell
-python -m src.pipeline
-```
-
-### Option 2: run the schema manually first
-
-```sql
--- Replace {{schema}} with your schema name, for example analytics,
--- then run the resulting SQL in PostgreSQL.
-```
-
-Then load with the Python pipeline.
-
-## How to run tests
+### 4. Run tests
 
 ```powershell
 pytest tests/test_transform.py
 ```
 
-## SQL KPI coverage
+## PostgreSQL configuration
 
-`sql/kpi_queries.sql` contains SQL for:
+Copy `.env.example` to `.env` and configure:
 
-- KPI summary
-- monthly revenue and MoM growth
-- top products
-- top categories
-- top regions
-- customer retention
-- low-performing products
+```text
+POSTGRES_HOST
+POSTGRES_PORT
+POSTGRES_DB
+POSTGRES_USER
+POSTGRES_PASSWORD
+POSTGRES_SCHEMA
+```
 
-## Power BI dashboard overview
+When credentials are available, the pipeline creates the reporting schema and loads the dimension/fact tables.
 
-The repository includes a full dashboard build guide in [dashboard_spec.md](docs/dashboard_spec.md).
-
-Recommended report pages:
-
-- Executive Overview
-- Sales Trends
-- Customer Insights
-- Product and Category Performance
-- Regional Performance
-
-The fastest Power BI path is to load `outputs/cleaned_dataset.csv` and create DAX measures from the cleaned fact-style export.
-
-## Example deliverables created
-
-- cleaned transaction dataset
-- star schema DDL
-- SQL KPI query pack
-- chart assets for reporting
-- business insights write-up
-- dashboard specification
+Without a configured PostgreSQL password, the CSV analytics workflow still runs.
 
 ## Portfolio value
 
-This project is suitable for applications to:
+This project demonstrates a complete analytics workflow rather than only a dashboard:
 
-- Data Analyst internships
-- BI Analyst roles
-- Reporting Analyst roles
-- Working Student data roles
-- Digitalization roles with reporting focus
+**Raw data → ETL → data modeling → SQL → KPIs → business insights → BI handoff**
 
-It demonstrates:
+It is particularly relevant to:
 
-- practical ETL engineering
-- SQL KPI design
-- production-friendly project structure
-- data storytelling
-- BI handoff readiness
+- Data Analyst
+- BI Analyst
+- Reporting Analyst
+- Analytics / Data Working Student
+- Junior Data Engineering roles with analytics responsibilities
 
-## Resume usage ideas
+### Resume-ready summary
 
-- Built an end-to-end retail analytics pipeline in Python and SQL, transforming raw transactional sales data into Power BI-ready KPI datasets and a PostgreSQL reporting model.
-- Designed a star-schema analytics database and KPI query pack covering revenue, profitability, customer retention, product performance, and regional reporting.
-- Produced business-facing documentation and dashboard specifications that translated computed metrics into management-ready insights.
+> Built an end-to-end retail analytics pipeline in Python and SQL, transforming transactional sales data into a PostgreSQL star schema and Power BI-ready KPI datasets covering revenue, profitability, customer retention, product performance, and regional analysis.
 
-## Future improvements
+## Limitations & next improvements
 
-- add dbt models for warehouse-style transformations
-- add orchestration with a lightweight scheduler
-- add data quality assertions beyond the current unit test
-- publish a `.pbix` file or Power BI screenshots
-- containerize PostgreSQL + pipeline execution with Docker
-
-## Notes and limitations
-
-- The dataset uses customer names rather than a native customer ID, so surrogate customer keys are generated during transformation.
-- PostgreSQL loading is implemented but requires local database credentials.
-- The project currently exports dashboard-ready CSVs instead of a committed `.pbix` file.
+- The source dataset uses customer names rather than a native customer ID, so surrogate customer keys are generated during transformation.
+- The current project exports Power BI-ready datasets rather than committing a `.pbix` file.
+- PostgreSQL loading requires local credentials.
+- Future iterations could add dbt, orchestration, stronger data-quality checks, Dockerized execution, and a published Power BI report.

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business KPI Dashboard | Recruiter Demo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top"><div><span class="eyebrow">RECRUITER DEMO</span><h1>Business KPI Dashboard & Analytics System</h1><p>Retail analytics pipeline from raw transactions to reporting-ready KPIs, PostgreSQL star schema and Power BI handoff.</p></div><div class="stack">Python · SQL · PostgreSQL · Power BI</div></header>
+<main>
+<section class="kpis">
+<div><span>Revenue</span><strong>$14.92M</strong></div><div><span>Profit</span><strong>$1.52M</strong></div><div><span>Margin</span><strong>10.2%</strong></div><div><span>Orders</span><strong>5,496</strong></div><div><span>Customers</span><strong>989</strong></div>
+</section>
+<section class="grid">
+<article class="card wide"><div class="cardhead"><div><span class="eyebrow">TREND</span><h2>Monthly revenue</h2></div><span class="muted">2009–2012</span></div><div id="trend" class="chart"></div></article>
+<article class="card"><div class="cardhead"><div><span class="eyebrow">PROFITABILITY</span><h2>Category performance</h2></div></div><div class="bars">
+<div><label>Technology <b>14.8%</b></label><i style="width:100%"></i></div>
+<div><label>Office Supplies <b>11.8%</b></label><i style="width:80%"></i></div>
+<div><label>Furniture <b>2.3%</b></label><i style="width:16%"></i></div>
+</div><p class="insight">Furniture is the main margin concern; Tables contribute about <b>-$99K</b> profit.</p></article>
+<article class="card"><div class="cardhead"><div><span class="eyebrow">CUSTOMERS</span><h2>Retention signal</h2></div></div><div class="donut"><strong>94.03%</strong><span>repeat customer rate</span></div><div class="mini"><span>Repeat customers <b>930</b></span><span>One-time <b>59</b></span></div></article>
+<article class="card wide"><div class="cardhead"><div><span class="eyebrow">GEOGRAPHY</span><h2>Regional performance</h2></div></div><div id="regions" class="regionlist"></div></article>
+</section>
+<section class="pipeline"><div><span class="eyebrow">DATA WORKFLOW</span><h2>From raw data to business decisions</h2></div><div class="flow"><span>Raw CSV</span><b>→</b><span>Python ETL</span><b>→</b><span>Clean dataset</span><b>→</b><span>PostgreSQL star schema</span><b>→</b><span>SQL KPI layer</span><b>→</b><span>Power BI</span></div></section>
+<section class="notes"><div><h2>What this demonstrates</h2><ul><li>Reusable Python transformation and validation workflow</li><li>Dimensional modeling with a fact table and analytical dimensions</li><li>SQL KPI layer covering revenue, profit, growth, customers and products</li><li>Power BI-ready outputs rather than dashboard-only analysis</li></ul></div><div><h2>Business findings</h2><ul><li>Technology is the strongest category-level profit engine.</li><li>Tables are a clear profitability problem despite high revenue.</li><li>Ontario leads revenue at about $3.06M.</li><li>March 2010 shows an unusually weak profit result relative to revenue.</li></ul></div></section>
+<footer>Portfolio showcase · Built from the repository's generated KPI outputs · <a href="https://github.com/Sahil-dub/business-kpi-dashboard-analytics-system">View source on GitHub</a></footer>
+</main><script src="app.js"></script>
+</body></html>
